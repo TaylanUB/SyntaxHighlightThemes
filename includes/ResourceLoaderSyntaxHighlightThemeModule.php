@@ -14,16 +14,16 @@ class ResourceLoaderSyntaxHighlightThemeModule extends ResourceLoaderFileModule 
 		}
 
 		$userManager = MediaWikiServices::getInstance()->getUserOptionsManager();
-        $user = RequestContext::getMain()->getUser();
+		$user = RequestContext::getMain()->getUser();
 		$theme = RequestContext::getMain()->getRequest()->getRawVal( 'usehighlighttheme' );
 		if ( !isset($themes[$theme]) ) {
-        	$theme = $userManager->getOption($user, 'syntaxhighlight-theme') ?? 'default';
+			$theme = $userManager->getOption($user, 'syntaxhighlight-theme') ?? 'default';
 		}
 		$this->styles = [ 'pygments.' . $theme . '.css' ];
 		return parent::getStyleFiles( $context );
 	}
 
-    public function shouldEmbedModule( ResourceLoaderContext $context ) {
+	public function shouldEmbedModule( ResourceLoaderContext $context ) {
 		return true;
 	}
 

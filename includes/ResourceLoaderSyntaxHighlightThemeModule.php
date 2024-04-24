@@ -16,7 +16,7 @@ class ResourceLoaderSyntaxHighlightThemeModule extends ResourceLoaderFileModule 
 		$userManager = MediaWikiServices::getInstance()->getUserOptionsManager();
 		$user = RequestContext::getMain()->getUser();
 		$theme = RequestContext::getMain()->getRequest()->getRawVal( 'usehighlighttheme' );
-		if ( !isset($themes[$theme]) ) {
+		if ( !isset($themes[$theme]) && !defined( 'MW_NO_SESSION' ) ) {
 			$theme = $userManager->getOption($user, 'syntaxhighlight-theme') ?? 'default';
 		}
 		$this->styles = [ 'pygments.' . $theme . '.css' ];
